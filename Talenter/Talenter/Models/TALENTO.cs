@@ -23,14 +23,21 @@ namespace Talenter.Models
     
         public int ID_TALENTO { get; set; }
         public int ID_RUBRO { get; set; }
+        [Required]
         [StringLength(50)]
+        [EmailAddress]
         public string EMAIL { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
         [StringLength(50)]
         public string PASSWORD { get; set; }
+        [Required]
         [StringLength(50)]
         public string NOMBRE { get; set; }
+        [Required]
         [StringLength(50)]
         public string APELLIDO { get; set; }
+        [Required]
         [StringLength(100)]
         public string CURRICULUM { get; set; }
     
