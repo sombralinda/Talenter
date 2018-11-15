@@ -1,0 +1,11 @@
+#Se llama al likear/dislikear una empresa, cambiar ID de empresa y de talento
+INSERT INTO DBO.VISITADOS(ID_EMPRESA, ID_TALENTO) VALUES (1,1);
+
+#Se llama a la hora de buscar la proxima empresa a likear/dislikear
+SELECT TOP 1 E.* FROM EMPRESA E JOIN TALENTO T ON E.ID_RUBRO = T.ID_RUBRO WHERE E.ID_EMPRESA NOT IN (
+SELECT v.ID_EMPRESA 
+FROM Visitados v JOIN Talento t
+ON v.ID_Talento = t.ID_Talento
+JOIN EMPRESA E ON V.ID_EMPRESA = E.ID_EMPRESA
+WHERE t.ID_Talento = 1) 
+AND T.ID_TALENTO = 1

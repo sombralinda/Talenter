@@ -1,0 +1,109 @@
+/*   SCRIPT SQL  - Tablas con Restricciones -   */
+
+CREATE TABLE CURRICULUM
+       (
+       ID_CURRICULUM INT NOT NULL IDENTITY(1,1),                              
+       LINK VARCHAR(200) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_CURRICULUM
+               )
+       );
+
+
+
+CREATE TABLE RUBRO
+       (
+       ID_RUBRO INT NOT NULL IDENTITY(1,1),                              
+       DESCRIPCION VARCHAR(30) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_RUBRO
+               )
+       );
+
+
+
+CREATE TABLE TALENTO
+       (
+       ID_TALENTO INT NOT NULL IDENTITY(1,1),                              
+       ID_CURRICULUM INT NOT NULL,                              
+       ID_RUBRO INT NOT NULL,                              
+       EMAIL VARCHAR(50) NOT NULL,                              
+       PASSWORD VARCHAR(50) NOT NULL,                              
+       NOMBRE VARCHAR(50) NOT NULL,                              
+       APELLIDO VARCHAR(50) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_TALENTO
+               ),
+       FOREIGN KEY
+               (
+               ID_CURRICULUM
+               )
+          REFERENCES CURRICULUM
+               (
+               ID_CURRICULUM
+               ),
+       FOREIGN KEY
+               (
+               ID_RUBRO
+               )
+          REFERENCES RUBRO
+               (
+               ID_RUBRO
+               )
+       );
+
+
+
+CREATE TABLE EMPRESA
+       (
+       ID_EMPRESA INT NOT NULL IDENTITY(1,1),                              
+       ID_RUBRO INT NOT NULL,                              
+       NOMBRE VARCHAR(50) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_EMPRESA
+               ),
+       FOREIGN KEY
+               (
+               ID_RUBRO
+               )
+          REFERENCES RUBRO
+               (
+               ID_RUBRO
+               )
+       );
+
+
+
+CREATE TABLE VISITADOS
+       (
+       ID_EMPRESA INT NOT NULL,                              
+       ID_TALENTO INT NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_EMPRESA,
+               ID_TALENTO
+               ),
+       FOREIGN KEY
+               (
+               ID_EMPRESA
+               )
+          REFERENCES EMPRESA
+               (
+               ID_EMPRESA
+               ),
+       FOREIGN KEY
+               (
+               ID_TALENTO
+               )
+          REFERENCES TALENTO
+               (
+               ID_TALENTO
+               )
+       );
+
+
+
