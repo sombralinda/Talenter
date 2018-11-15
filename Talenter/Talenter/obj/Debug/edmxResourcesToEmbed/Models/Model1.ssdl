@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TalenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RUBRO" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RUBRO">
+    <Key>
+      <PropertyRef Name="ID_RUBRO" />
+    </Key>
+    <Property Name="ID_RUBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TALENTO">
+    <Key>
+      <PropertyRef Name="ID_TALENTO" />
+    </Key>
+    <Property Name="ID_TALENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_RUBRO" Type="int" Nullable="false" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CURRICULUM" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="VISITADOS">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+      <PropertyRef Name="ID_TALENTO" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+    <Property Name="ID_TALENTO" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__EMPRESA__ID_RUBR__2B3F6F97">
+    <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RUBRO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="ID_RUBRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TALENTO__ID_RUBR__286302EC">
+    <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+    <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RUBRO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Principal>
+      <Dependent Role="TALENTO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VISITADOS__ID_EM__2E1BDC42">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="VISITADOS" Type="Self.VISITADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="VISITADOS">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VISITADOS__ID_TA__2F10007B">
+    <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="1" />
+    <End Role="VISITADOS" Type="Self.VISITADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TALENTO">
+        <PropertyRef Name="ID_TALENTO" />
+      </Principal>
+      <Dependent Role="VISITADOS">
+        <PropertyRef Name="ID_TALENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TalenterModelStoreContainer">
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RUBRO" EntityType="Self.RUBRO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TALENTO" EntityType="Self.TALENTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VISITADOS" EntityType="Self.VISITADOS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EMPRESA__ID_RUBR__2B3F6F97" Association="Self.FK__EMPRESA__ID_RUBR__2B3F6F97">
+      <End Role="RUBRO" EntitySet="RUBRO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TALENTO__ID_RUBR__286302EC" Association="Self.FK__TALENTO__ID_RUBR__286302EC">
+      <End Role="RUBRO" EntitySet="RUBRO" />
+      <End Role="TALENTO" EntitySet="TALENTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VISITADOS__ID_EM__2E1BDC42" Association="Self.FK__VISITADOS__ID_EM__2E1BDC42">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="VISITADOS" EntitySet="VISITADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VISITADOS__ID_TA__2F10007B" Association="Self.FK__VISITADOS__ID_TA__2F10007B">
+      <End Role="TALENTO" EntitySet="TALENTO" />
+      <End Role="VISITADOS" EntitySet="VISITADOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

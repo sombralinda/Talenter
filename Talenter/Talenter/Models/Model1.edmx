@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TalenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TALENTO">
+          <Key>
+            <PropertyRef Name="ID_TALENTO" />
+          </Key>
+          <Property Name="ID_TALENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_RUBRO" Type="int" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CURRICULUM" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="VISITADOS">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+            <PropertyRef Name="ID_TALENTO" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
+          <Property Name="ID_TALENTO" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__EMPRESA__ID_RUBR__2B3F6F97">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TALENTO__ID_RUBR__286302EC">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TALENTO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VISITADOS__ID_EM__2E1BDC42">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="VISITADOS" Type="Self.VISITADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="VISITADOS">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VISITADOS__ID_TA__2F10007B">
+          <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="1" />
+          <End Role="VISITADOS" Type="Self.VISITADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TALENTO">
+              <PropertyRef Name="ID_TALENTO" />
+            </Principal>
+            <Dependent Role="VISITADOS">
+              <PropertyRef Name="ID_TALENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TalenterModelStoreContainer">
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RUBRO" EntityType="Self.RUBRO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TALENTO" EntityType="Self.TALENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VISITADOS" EntityType="Self.VISITADOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EMPRESA__ID_RUBR__2B3F6F97" Association="Self.FK__EMPRESA__ID_RUBR__2B3F6F97">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TALENTO__ID_RUBR__286302EC" Association="Self.FK__TALENTO__ID_RUBR__286302EC">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TALENTO" EntitySet="TALENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VISITADOS__ID_EM__2E1BDC42" Association="Self.FK__VISITADOS__ID_EM__2E1BDC42">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="VISITADOS" EntitySet="VISITADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VISITADOS__ID_TA__2F10007B" Association="Self.FK__VISITADOS__ID_TA__2F10007B">
+            <End Role="TALENTO" EntitySet="TALENTO" />
+            <End Role="VISITADOS" EntitySet="VISITADOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TalenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RUBRO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RUBRO" Relationship="Self.FK__EMPRESA__ID_RUBR__2B3F6F97" FromRole="EMPRESA" ToRole="RUBRO" />
+          <NavigationProperty Name="TALENTO" Relationship="Self.VISITADOS" FromRole="EMPRESA" ToRole="TALENTO" />
+        </EntityType>
+        <EntityType Name="RUBRO">
+          <Key>
+            <PropertyRef Name="ID_RUBRO" />
+          </Key>
+          <Property Name="ID_RUBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK__EMPRESA__ID_RUBR__2B3F6F97" FromRole="RUBRO" ToRole="EMPRESA" />
+          <NavigationProperty Name="TALENTO" Relationship="Self.FK__TALENTO__ID_RUBR__286302EC" FromRole="RUBRO" ToRole="TALENTO" />
+        </EntityType>
+        <EntityType Name="TALENTO">
+          <Key>
+            <PropertyRef Name="ID_TALENTO" />
+          </Key>
+          <Property Name="ID_TALENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RUBRO" Type="Int32" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CURRICULUM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RUBRO" Relationship="Self.FK__TALENTO__ID_RUBR__286302EC" FromRole="TALENTO" ToRole="RUBRO" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.VISITADOS" FromRole="TALENTO" ToRole="EMPRESA" />
+        </EntityType>
+        <Association Name="FK__EMPRESA__ID_RUBR__2B3F6F97">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TALENTO__ID_RUBR__286302EC">
+          <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+          <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUBRO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Principal>
+            <Dependent Role="TALENTO">
+              <PropertyRef Name="ID_RUBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VISITADOS">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TalenterEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="RUBRO" EntityType="Self.RUBRO" />
+          <EntitySet Name="TALENTO" EntityType="Self.TALENTO" />
+          <AssociationSet Name="FK__EMPRESA__ID_RUBR__2B3F6F97" Association="Self.FK__EMPRESA__ID_RUBR__2B3F6F97">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TALENTO__ID_RUBR__286302EC" Association="Self.FK__TALENTO__ID_RUBR__286302EC">
+            <End Role="RUBRO" EntitySet="RUBRO" />
+            <End Role="TALENTO" EntitySet="TALENTO" />
+          </AssociationSet>
+          <AssociationSet Name="VISITADOS" Association="Self.VISITADOS">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="TALENTO" EntitySet="TALENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TalenterModelStoreContainer" CdmEntityContainer="TalenterEntities1">
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="TalenterModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RUBRO">
+            <EntityTypeMapping TypeName="TalenterModel.RUBRO">
+              <MappingFragment StoreEntitySet="RUBRO">
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TALENTO">
+            <EntityTypeMapping TypeName="TalenterModel.TALENTO">
+              <MappingFragment StoreEntitySet="TALENTO">
+                <ScalarProperty Name="ID_TALENTO" ColumnName="ID_TALENTO" />
+                <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CURRICULUM" ColumnName="CURRICULUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="VISITADOS" TypeName="TalenterModel.VISITADOS" StoreEntitySet="VISITADOS">
+            <EndProperty Name="EMPRESA">
+              <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+            </EndProperty>
+            <EndProperty Name="TALENTO">
+              <ScalarProperty Name="ID_TALENTO" ColumnName="ID_TALENTO" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

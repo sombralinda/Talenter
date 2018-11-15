@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TalenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_RUBRO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RUBRO" Relationship="Self.FK__EMPRESA__ID_RUBR__2B3F6F97" FromRole="EMPRESA" ToRole="RUBRO" />
+    <NavigationProperty Name="TALENTO" Relationship="Self.VISITADOS" FromRole="EMPRESA" ToRole="TALENTO" />
+  </EntityType>
+  <EntityType Name="RUBRO">
+    <Key>
+      <PropertyRef Name="ID_RUBRO" />
+    </Key>
+    <Property Name="ID_RUBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.FK__EMPRESA__ID_RUBR__2B3F6F97" FromRole="RUBRO" ToRole="EMPRESA" />
+    <NavigationProperty Name="TALENTO" Relationship="Self.FK__TALENTO__ID_RUBR__286302EC" FromRole="RUBRO" ToRole="TALENTO" />
+  </EntityType>
+  <EntityType Name="TALENTO">
+    <Key>
+      <PropertyRef Name="ID_TALENTO" />
+    </Key>
+    <Property Name="ID_TALENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_RUBRO" Type="Int32" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CURRICULUM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RUBRO" Relationship="Self.FK__TALENTO__ID_RUBR__286302EC" FromRole="TALENTO" ToRole="RUBRO" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.VISITADOS" FromRole="TALENTO" ToRole="EMPRESA" />
+  </EntityType>
+  <Association Name="FK__EMPRESA__ID_RUBR__2B3F6F97">
+    <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RUBRO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Principal>
+      <Dependent Role="EMPRESA">
+        <PropertyRef Name="ID_RUBRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TALENTO__ID_RUBR__286302EC">
+    <End Role="RUBRO" Type="Self.RUBRO" Multiplicity="1" />
+    <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RUBRO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Principal>
+      <Dependent Role="TALENTO">
+        <PropertyRef Name="ID_RUBRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VISITADOS">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+    <End Role="TALENTO" Type="Self.TALENTO" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TalenterEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+    <EntitySet Name="RUBRO" EntityType="Self.RUBRO" />
+    <EntitySet Name="TALENTO" EntityType="Self.TALENTO" />
+    <AssociationSet Name="FK__EMPRESA__ID_RUBR__2B3F6F97" Association="Self.FK__EMPRESA__ID_RUBR__2B3F6F97">
+      <End Role="RUBRO" EntitySet="RUBRO" />
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TALENTO__ID_RUBR__286302EC" Association="Self.FK__TALENTO__ID_RUBR__286302EC">
+      <End Role="RUBRO" EntitySet="RUBRO" />
+      <End Role="TALENTO" EntitySet="TALENTO" />
+    </AssociationSet>
+    <AssociationSet Name="VISITADOS" Association="Self.VISITADOS">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="TALENTO" EntitySet="TALENTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
