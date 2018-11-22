@@ -11,8 +11,7 @@ namespace Talenter.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class EMPRESA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +22,6 @@ namespace Talenter.Models
     
         public int ID_EMPRESA { get; set; }
         public int ID_RUBRO { get; set; }
-        [StringLength(50)]
         public string NOMBRE { get; set; }
     
         public virtual RUBRO RUBRO { get; set; }

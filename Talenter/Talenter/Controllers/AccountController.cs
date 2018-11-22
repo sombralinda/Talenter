@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Talenter.Models;
+using System.Configuration;
+using System.Data;
 
 namespace Talenter.Controllers
 {
@@ -17,12 +20,14 @@ namespace Talenter.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private TALENTO Talento;
 
         public AccountController()
         {
+
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +39,9 @@ namespace Talenter.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -66,29 +71,56 @@ namespace Talenter.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(TALENTO model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            using (TalenterEntities1 DB = new TalenterEntities1())
             {
-                return View(model);
+                var user = DB.TALENTO.Where(x => x.EMAIL == model.EMAIL && x.PASSWORD == model.PASSWORD).FirstOrDefault();
+                if (user != null)
+                {
+                    Session["UserId"] = user.ID_TALENTO;
+                    Session["Email"] = user.EMAIL;
+                    Talento = user;
+                    return RedirectToAction("LoggedIn");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Username or Password is Incorrect");
+                    return View();
+                }
             }
+        }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+        public bool IsLoggedIn()
+        {
+            return Session["UserId"] != null;
+        }
+
+        [AllowAnonymous]
+        public ActionResult SearchJob()
+        {
+            if (IsLoggedIn())
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                
+
+                return View();
             }
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult VerifyLogin(ViewResult view)
+        {
+            if (IsLoggedIn())
+            {
+                return view;
+            }
+            return RedirectToAction("Login");
+        }
+
+        [AllowAnonymous]
+        public ActionResult LoggedIn()
+        {
+            return VerifyLogin(View());
         }
 
         //

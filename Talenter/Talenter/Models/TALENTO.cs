@@ -11,8 +11,7 @@ namespace Talenter.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TALENTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,22 +22,10 @@ namespace Talenter.Models
     
         public int ID_TALENTO { get; set; }
         public int ID_RUBRO { get; set; }
-        [Required]
-        [StringLength(50)]
-        [EmailAddress]
         public string EMAIL { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(50)]
         public string PASSWORD { get; set; }
-        [Required]
-        [StringLength(50)]
         public string NOMBRE { get; set; }
-        [Required]
-        [StringLength(50)]
         public string APELLIDO { get; set; }
-        [Required]
-        [StringLength(100)]
         public string CURRICULUM { get; set; }
     
         public virtual RUBRO RUBRO { get; set; }

@@ -61,6 +61,14 @@ namespace Talenter.Controllers
             return View(tALENTO);
         }
 
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
         // GET: Talento/Edit/5
         public ActionResult Edit(int? id)
         {
