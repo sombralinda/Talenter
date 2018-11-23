@@ -1,9 +1,46 @@
 ﻿body {
 }
 
-.roundBox-login {
-    width: 500px;
-    padding: 20px;
+.jobs{
+    margin-top:50px;
+}
+
+.roundBox-job {
+    width: 100%;
     background: rgba( 240,248,255, 0.5);
-    border-radius: 5px;
+    border-radius: 10px;
+}
+
+.title-job{
+   padding:20px;
+   background: #2894E3;
+   font-size: 30px;
+   width: 100%;
+
+}
+
+.about-job {
+    padding: 20px;
+    font-style:italic;
+}
+
+.no-aplicar,
+.aplicar{
+    margin-top: 100px;
+}
+
+.no-aplicar{
+    margin-right:30px;
+}
+
+.btn {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+img{
+    margin-left: 10px;
+    height:50px;
+    width:50px;
 }
