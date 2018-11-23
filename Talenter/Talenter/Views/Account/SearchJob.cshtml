@@ -1,7 +1,51 @@
-﻿
+﻿@model Talenter.Models.EMPRESA
 @{
     ViewBag.Title = "SearchJob";
 }
+<link href="~/Content/SearchJobStyle.css" rel="stylesheet" />
+
 
 <h2>SearchJob</h2>
 
+<div class="form-group">
+
+    <div class="container col-lg-12">
+
+        <div class="no-aplicar col-lg-4">
+            <button class="btn btn-danger">Paso</button>
+        </div>
+
+        <div class="empresa-dato col-lg-4">
+            <div class="roundBox">
+                @Html.LabelFor(x => x.ID_EMPRESA, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div>
+                    @Html.EditorFor(x => x.ID_EMPRESA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.ID_EMPRESA, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(x => x.ID_RUBRO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(x => x.ID_RUBRO, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.ID_RUBRO, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(x => x.NOMBRE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(x => x.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.NOMBRE, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(x => x.ABOUT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(x => x.ABOUT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.ABOUT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="aplicar col-lg-4">
+            <button class="btn btn-success">Aplicar</button>
+        </div>
+    </div>
+  </div>

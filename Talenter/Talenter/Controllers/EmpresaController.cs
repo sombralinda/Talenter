@@ -48,7 +48,7 @@ namespace Talenter.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_EMPRESA,ID_RUBRO,NOMBRE")] EMPRESA eMPRESA)
+        public ActionResult Create([Bind(Include = "ID_EMPRESA,ID_RUBRO,NOMBRE, ABOUT")] EMPRESA eMPRESA)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace Talenter.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_EMPRESA,ID_RUBRO,NOMBRE")] EMPRESA eMPRESA)
+        public ActionResult Edit([Bind(Include = "ID_EMPRESA,ID_RUBRO,NOMBRE,ABOUT")] EMPRESA eMPRESA)
         {
             if (ModelState.IsValid)
             {

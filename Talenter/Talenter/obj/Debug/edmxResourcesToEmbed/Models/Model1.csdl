@@ -9,6 +9,7 @@
     <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="RUBRO" Relationship="Self.FK__EMPRESA__ID_RUBR__2B3F6F97" FromRole="EMPRESA" ToRole="RUBRO" />
     <NavigationProperty Name="TALENTO" Relationship="Self.VISITADOS" FromRole="EMPRESA" ToRole="TALENTO" />
+    <Property Name="ABOUT" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="RUBRO">
     <Key>

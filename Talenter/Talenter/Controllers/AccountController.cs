@@ -81,7 +81,7 @@ namespace Talenter.Controllers
                     Session["UserId"] = user.ID_TALENTO;
                     Session["Email"] = user.EMAIL;
                     Talento = user;
-                    return RedirectToAction("LoggedIn");
+                    return RedirectToAction("SearchJob");
                 }
                 else
                 {
@@ -101,9 +101,21 @@ namespace Talenter.Controllers
         {
             if (IsLoggedIn())
             {
-                
+                EMPRESA empresa = null;
+                using (var db = new TalenterEntities1())
+                {
+                    Talento = db.TALENTO.SqlQuery("SELECT * FROM TALENTO WHERE ID_Talento = @id", new SqlParameter("@id", Session["UserId"])).FirstOrDefault();
 
-                return View();
+                    empresa = db.EMPRESA.SqlQuery(@"SELECT TOP 1 E.* FROM EMPRESA E JOIN TALENTO T ON E.ID_RUBRO = T.ID_RUBRO WHERE E.ID_EMPRESA NOT IN (
+                                                            SELECT v.ID_EMPRESA 
+                                                            FROM Visitados v JOIN Talento t
+                                                            ON v.ID_Talento = t.ID_Talento
+                                                            JOIN EMPRESA E ON V.ID_EMPRESA = E.ID_EMPRESA
+                                                            WHERE t.ID_Talento = @id) 
+                                                            AND T.ID_TALENTO = @id", new SqlParameter("@id", Talento.ID_TALENTO)).FirstOrDefault();
+                }
+
+                return View(empresa);
             }
             return RedirectToAction("Login");
         }

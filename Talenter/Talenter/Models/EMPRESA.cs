@@ -23,6 +23,7 @@ namespace Talenter.Models
         public int ID_EMPRESA { get; set; }
         public int ID_RUBRO { get; set; }
         public string NOMBRE { get; set; }
+        public string ABOUT { get; set; }
     
         public virtual RUBRO RUBRO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

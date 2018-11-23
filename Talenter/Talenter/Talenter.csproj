@@ -249,6 +249,7 @@
     <Content Include="Content\RegisterStyle.css" />
     <Content Include="Content\images\talentos-talenter.jpg" />
     <Content Include="Content\IndexStyle.css" />
+    <Content Include="Content\SearchJobStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

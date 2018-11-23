@@ -7,6 +7,7 @@
     <Property Name="ID_EMPRESA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_RUBRO" Type="int" Nullable="false" />
     <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ABOUT" Type="varchar" MaxLength="2000" />
   </EntityType>
   <EntityType Name="RUBRO">
     <Key>

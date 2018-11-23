@@ -4,6 +4,7 @@
     <EntitySetMapping Name="EMPRESA">
       <EntityTypeMapping TypeName="TalenterModel.EMPRESA">
         <MappingFragment StoreEntitySet="EMPRESA">
+          <ScalarProperty Name="ABOUT" ColumnName="ABOUT" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
           <ScalarProperty Name="ID_RUBRO" ColumnName="ID_RUBRO" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
