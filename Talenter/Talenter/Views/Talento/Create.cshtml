@@ -4,13 +4,14 @@
 }
 <link href="~/Content/RegisterStyle.css" rel="stylesheet" />
 
-<h2>Crea un nuevo Talento</h2>
-
+<h2>REGISTRO</h2>
+<h4>Crea un nuevo Talento!</h4>
+<hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h4>TALENTO</h4>
-    <hr />
+
+
     <div class="container col-md-6 col-sm-12">
         <div class="form-horizontal">
 
@@ -67,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     </div>
                 </div>
 

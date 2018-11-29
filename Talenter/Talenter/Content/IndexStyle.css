@@ -1,12 +1,33 @@
 ﻿body {
     color: white !important;
-    background-color: #1E2741 !important;
+    background-color: #7698B3 !important;
 }
 
 p {
     font-size: 20px;
     color: black;
   
+}
+
+a.my-class {
+    color: White
+}
+
+    a.my-class:active {
+        color: White
+    }
+
+    a.my-class:link {
+        color: white
+    }
+
+    a.my-class:hover {
+        color: #1E2741 !important;
+    }
+
+   
+.navbar{
+    background: #1E2741 !important;
 }
 
 .tit {
