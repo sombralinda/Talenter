@@ -5,13 +5,25 @@
 <link href="~/Content/SearchJobStyle.css" rel="stylesheet" />
 
 
+<script>
+
+    $('#btn-apli').click(function () {
+        document.location = '@Url.Action("Create", "Talento")';
+    });
+
+    function hola(eid, tid) {
+        document.location = "http://localhost:50107/Account/SearchJob/?eid=" + eid + "&tid=" + tid; //'@Url.Action("SearchJob", "Account")';
+    }
+   
+</script>
+
 <h2>HAY TALENTO!</h2>
 <h4>Estas son las empresas que coinciden con tu perfil. Matchea ahora!</h4>
 <hr />
 <div class="container">
     <div class="jobs col-lg-12">
         <div class="no-aplicar col-lg-1">
-            <button class="btn btn-danger"><span><img src="~/Content/images/cancel-job-talenter.png" alt="Alternate Text" /></span></button>
+            <button class="btn btn-danger" onclick="hola(@Session["eid"], @Session["UserId"]);"><span><img src="~/Content/images/cancel-job-talenter.png" alt="Alternate Text" /> </span></button>
         </div>
         <div class="empresa-dato col-lg-8">
             <div class="roundBox-job">
@@ -27,7 +39,30 @@
             </div>
         </div>
         <div class="aplicar col-lg-2">
-            <button class="btn btn-success"><span><img src="~/Content/images/apply-job-talenter.png" alt="Alternate Text" /></span></button>
+
+            <button data-toggle="modal" data-target="#myModal" id="btn-apli" class="btn btn-success" ><span><img src="~/Content/images/apply-job-talenter.png" alt="Alternate Text" /></span></button>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Match</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Matcheastte putito!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="hola(@Session["eid"], @Session["UserId"]);">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

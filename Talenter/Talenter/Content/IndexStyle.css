@@ -9,6 +9,12 @@ p {
   
 }
 
+.queonda {
+    max-width: 79%;
+    text-align: center;
+    margin-left: 9%;
+}
+
 a.my-class {
     color: White
 }

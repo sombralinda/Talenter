@@ -80,6 +80,7 @@ namespace Talenter.Controllers
                 {
                     Session["UserId"] = user.ID_TALENTO;
                     Session["Email"] = user.EMAIL;
+                    Session["Name"] = user.NOMBRE;
                     Talento = user;
                     return RedirectToAction("SearchJob");
                 }
@@ -97,10 +98,37 @@ namespace Talenter.Controllers
         }
 
         [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            Session["UserId"] = null;
+            Session["Email"] = null;
+            Session["Name"] = null;
+            return RedirectToAction("Login");
+        }
+
+        [AllowAnonymous]
         public ActionResult SearchJob()
         {
             if (IsLoggedIn())
             {
+                try
+                {
+                    var talentoId = Request.QueryString["tid"];
+                    var empresaId = Request.QueryString["eid"];
+
+                    if(empresaId != "-1")
+                    {
+                        using (var db = new TalenterEntities1())
+                        {
+                            db.Database.ExecuteSqlCommand("INSERT INTO DBO.VISITADOS(ID_EMPRESA, ID_TALENTO) VALUES (@emp, @tal)",
+                                new SqlParameter("@emp", empresaId), new SqlParameter("@tal", talentoId));
+                        }
+                    }
+                } catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
                 EMPRESA empresa = null;
                 using (var db = new TalenterEntities1())
                 {
@@ -113,13 +141,26 @@ namespace Talenter.Controllers
                                                             JOIN EMPRESA E ON V.ID_EMPRESA = E.ID_EMPRESA
                                                             WHERE t.ID_Talento = @id) 
                                                             AND T.ID_TALENTO = @id", new SqlParameter("@id", Talento.ID_TALENTO)).FirstOrDefault();
+                    
+                    if(empresa == null)
+                    {
+                        empresa = new EMPRESA
+                        {
+                            ID_EMPRESA = -1,
+                            NOMBRE = "Ya no hay mas empresas!",
+                            ABOUT = "Ya visitaste todas las empresas de tu rubro! Espera a que aparezcan mas!",
+                            RUBRO = Talento.RUBRO
+                        };
+                    }
+
+                    Session["eid"] = empresa.ID_EMPRESA;
                 }
 
                 return View(empresa);
             }
             return RedirectToAction("Login");
         }
-
+        
         public ActionResult VerifyLogin(ViewResult view)
         {
             if (IsLoggedIn())

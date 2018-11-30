@@ -52,8 +52,14 @@ namespace Talenter.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.EMPRESA.Add(eMPRESA);
-                db.SaveChanges();
+                try
+                {
+                    db.EMPRESA.Add(eMPRESA);
+                    db.SaveChanges();
+                } catch(Exception e)
+                {
+
+                }
                 return RedirectToAction("Index");
             }
 
