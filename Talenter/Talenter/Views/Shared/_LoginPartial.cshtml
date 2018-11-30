@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 
+
 <link href="~/Content/IndexStyle.css" rel="stylesheet" />
 @if (Session["UserId"] != null)
 {
@@ -9,9 +10,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + Session["Name"] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + Session["Name"] + "!", "Details","Talento", routeValues: new { id = Session["UserId"] }, htmlAttributes: new { title = "Manage", @class = "my-class" })
             </li>
-            <li>@Html.ActionLink("Log out", "Logout", "Account")</li>
+            <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { Style = "color:red" })</li>
         </ul>
     }
 }
