@@ -11,7 +11,8 @@ namespace Talenter.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TALENTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,18 @@ namespace Talenter.Models
     
         public int ID_TALENTO { get; set; }
         public int ID_RUBRO { get; set; }
+        [StringLength(50)]
+        [Required(ErrorMessage = "El campo Email es requerido")]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Ingrese un Email valido")]
         public string EMAIL { get; set; }
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Ingrese un Password valido")]
+        [Required(ErrorMessage = "El campo Password es requerido")]
         public string PASSWORD { get; set; }
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Ingrese un Nombre valido")]
+        [Required(ErrorMessage = "El campo Nombre es requerido")]
         public string NOMBRE { get; set; }
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Ingrese un Apellido valido")]
+        [Required(ErrorMessage = "El campo Apellido es requerido")]
         public string APELLIDO { get; set; }
         public string CURRICULUM { get; set; }
     

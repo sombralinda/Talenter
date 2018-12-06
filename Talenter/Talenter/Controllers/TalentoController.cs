@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -50,13 +51,16 @@ namespace Talenter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_TALENTO,ID_RUBRO,EMAIL,PASSWORD,NOMBRE,APELLIDO,CURRICULUM")] TALENTO tALENTO)
         {
-            if (ModelState.IsValid)
-            {
-                db.TALENTO.Add(tALENTO);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
+           
+                if (ModelState.IsValid)
+                {
+                  db.TALENTO.Add(tALENTO);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+           
+           
+                
             ViewBag.ID_RUBRO = new SelectList(db.RUBRO, "ID_RUBRO", "DESCRIPCION", tALENTO.ID_RUBRO);
             return View(tALENTO);
         }
