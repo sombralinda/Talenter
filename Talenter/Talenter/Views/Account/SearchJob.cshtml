@@ -6,7 +6,7 @@
 
 
 <script>
-    function hola(eid, tid) {
+    function getId(eid, tid) {
         document.location = "http://localhost:50107/Account/SearchJob/?eid=" + eid + "&tid=" + tid; //'@Url.Action("SearchJob", "Account")';
     }
    
@@ -18,7 +18,7 @@
 <div class="container">
     <div class="jobs col-lg-12">
         <div class="no-aplicar col-lg-1">
-            <button class="btn btn-danger apli-job" onclick="hola(@Session["eid"], @Session["UserId"]);"><span><img src="~/Content/images/cancel-job-talenter.png" alt="Alternate Text" /> </span></button>
+            <button class="btn btn-danger apli-job" onclick="getId(@Session["eid"], @Session["UserId"]);"><span><img src="~/Content/images/cancel-job-talenter.png" alt="Alternate Text" /> </span></button>
         </div>
         <div class="empresa-dato col-lg-8">
             <div class="roundBox-job">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="modal-text">¿Estas seguro de querer aplicar para ese empleo?</p>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="hola(@Session["eid"], @Session["UserId"]);">Aplicar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="getId(@Session["eid"], @Session["UserId"]);">Aplicar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">En otro momento</button>
 
                 </div>

@@ -56,7 +56,7 @@ namespace Talenter.Controllers
                 {
                   db.TALENTO.Add(tALENTO);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login", "Account");
                 }
            
            
@@ -100,7 +100,7 @@ namespace Talenter.Controllers
             {
                 db.Entry(tALENTO).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Talento", new { id = tALENTO.ID_TALENTO });
             }
             ViewBag.ID_RUBRO = new SelectList(db.RUBRO, "ID_RUBRO", "DESCRIPCION", tALENTO.ID_RUBRO);
             return View(tALENTO);

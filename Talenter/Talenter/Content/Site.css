@@ -1,10 +1,12 @@
 ﻿body {
     color:white;
+    width:100%;
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
 .footer-p{
+    padding-left:15px;
     color:white;
 }
 

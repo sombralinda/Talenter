@@ -2,18 +2,24 @@
 
 
 <link href="~/Content/IndexStyle.css" rel="stylesheet" />
+
 @if (Session["UserId"] != null)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + Session["Name"] + "!", "Details","Talento", routeValues: new { id = Session["UserId"] }, htmlAttributes: new { title = "Manage", @class = "my-class" })
-            </li>
-            <li>@Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { Style = "color:red" })</li>
-        </ul>
+<ul class=" nav navbar-nav navbar-right" >
+    <li>
+        @Html.ActionLink("Hola " + Session["Name"] + "!", "Details", "Talento", routeValues: new { id = Session["UserId"] }, htmlAttributes: new { title = "Manage", @class = "my-class" })
+    </li>
+    <li>
+        @Html.ActionLink("Buscar", "SearchJob", "Account", routeValues: null, htmlAttributes: new { @class = "my-class" })
+    </li>
+    <li>
+        @Html.ActionLink("Log out", "Logout", "Account", routeValues: null, htmlAttributes: new { Style = "color:red" })
+    </li>
+</ul>
     }
 }
 else
